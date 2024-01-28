@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click box</title>
+    <style>
+        #block{
+            height: 2rem;
+            width : 3rem;
+            background-color: rgb(15, 7, 7);
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <p id="timer">Timer: 01 : 00</p>
+
+        <p id="para">Total score: <span id="value">0</span></p>
+        <div id="block" onclick="calculateCount()"></div>
+    </center>
+</body>
+<script>
+    var count=0;
+    function calculateCount(){
+        count+=1;
+        var p = document.getElementById("value");
+        p.innerHTML=count;
+        document.getElementById("block").style.marginTop=Math.random()*500+"px";
+        document.getElementById("block").style.marginLeft=Math.random()*300+"px";
+    }
+    var seconds=60;
+    function timer(){
+        seconds--;
+        var min = Math.floor(seconds/60)+"0";
+        var rem = seconds%60;
+        if(rem<10)
+            rem="0"+rem;
+        document.getElementById("timer").innerHTML = "Timer: "+min+" : "+rem;
+        if(seconds==0){
+            clearTimeout(timerId);
+            window.alert("Game over. Your score is "+count);
+            location.reload();
+        }
+    }
+    var timerId = setInterval(timer,1000);
+
+</script>
+</html>
