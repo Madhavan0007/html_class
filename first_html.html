@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the game</title>
+</head>
+<body onload="randomNumber()">
+    <center>
+        <h1>Number guessing Game</h1>
+        <p>
+            We have selected a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess is high or low.
+        </p>
+        <form>
+            <label for="guess">
+                <h3> Enter a guess:</h3>
+            </label>
+            <input type="number" name="guess" id="guess" min="1" max="100" placeholder="Enter your guess" required>
+            <input type="button" value="Submit Guess" onclick="showResults()">
+        </form>
+        <p id="guessing"></p>
+        <p id="alert"></p>
+        <p id="result"></p>
+
+        <input type="button" value="Retry" onclick="location.reload()">
+
+    </center>
+    
+
+
+    <script>
+        var random;
+        function randomNumber(){
+            random = Math.floor(Math.random()*100)+1;
+            console.log(random);
+        }
+        let guesses = 10;
+        function showResults(){
+            let input = document.getElementById("guess");
+            let guessing = document.getElementById("guessing");
+            let alert = document.getElementById("alert");
+            let result =  document.getElementById("result");
+            let value = input.value;
+            guesses-=1;
+            console.log(guesses);
+            guessing.innerHTML+=value+" ";
+            if(guesses<0){
+                input.value=0;
+                input.disabled = true;
+                result.innerHTML="The correct answer is "+random;
+            }
+            if(value==random){
+                input.disabled = true;
+                alert.innerHTML="Your answer is correct!";
+                alert.style.backgroundColor="green";
+            }
+            else{
+                if(value<random){
+                    alert.innerHTML="Your answer is low";
+                    alert.style.backgroundColor="red";
+                    alert.style.color="white";
+                }
+
+                else{
+                    alert.innerHTML="Your answer is high";
+                    alert.style.backgroundColor="red";
+                    alert.style.color="white";
+                }
+
+
+            }
+        }
+    </script>
+</body>
+</html>
