@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .guess{
+        width:4rem;
+        height:2rem;
+    }
+</style>
+<body>
+    <center>
+        <h1>Number guessing Game</h1>
+        <p>
+            We have selected a random number between 1 and 1000. See if you can guess it in 10 turns or fewer. We'll tell you if your guess is high or low.
+        </p>
+        <form>
+            <label for="guess">
+                <h3> Enter a guess:</h3>
+            </label>
+            <input class="guess" type="number" name="guess" id="guess1" min="0" max="9"  required value="0">
+            <input class="guess" type="number" name="guess" id="guess2" min="0" max="9"  required value="0">
+            <input class="guess" type="number" name="guess" id="guess3" min="0" max="9"  required value="0">
+            <input class="guess" type="number" name="guess" id="guess4" min="0" max="9"  required value="0">
+            <br>
+            <br>
+            <input type="button" value="Submit Guess" onclick="logic()">
+        </form>
+        <p id="guessing"> Your guess: </p>
+        <p id="result" style="color: white;"></p>
+
+        <input type="button" value="Retry" onclick="location.reload()">
+
+    </center>
+</body>
+<script>
+    let guesses=10;
+    function logic(){
+        guesses-=1;
+        var expected = [1,9,8,7];
+        console.log("hello");
+        var score=0;
+        var observe = [0,0,0,0];
+        observe[0] = document.getElementById("guess1").value;
+        observe[1] = document.getElementById("guess2").value;
+        observe[2] = document.getElementById("guess3").value;
+        observe[3] = document.getElementById("guess4").value;
+        for(var i=0;i<4;i++){
+            for(var j=0;j<4;j++){
+                if(observe[i]==expected[j]){
+                    if(i==j)
+                        score+=10;
+                    else
+                        score+=2;
+                }
+            }
+        }
+        if(score==40){
+            document.getElementById("result").innerHTML = "Congratulations you got it right";
+            document.getElementById("result").style.backgroundColor="green";
+        }
+        else{
+            document.getElementById("guessing").innerHTML += observe[0]+""+observe[1]+""+observe[2]+""+observe[3]+" ";
+            document.getElementById("result").innerHTML = "Not a correct one , Better luck next time.";
+            document.getElementById("result").style.backgroundColor="red";
+        }
+        if(guesses<0){
+                input.disabled = true;
+                result.innerHTML="The correct answer is "+random;
+        }
+    }
+</script>
+</html>
